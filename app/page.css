@@ -11,6 +11,7 @@ body {
 .mainContainer {
   display: flex;
   flex-direction: column;
+  width: 40%;
   gap: 30px;
 }
 .toDoListArea {
@@ -37,20 +38,14 @@ body {
   padding: 20px 0;
   gap: 10px;
 }
-.inputAreaParentUpper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 1000px;
-}
 .inputAreaParent {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 .inputField {
-  width: 400px;
+  width: 100%;
   height: 200px;
   background-color: transparent;
   border: solid 5px lightblue;
@@ -70,11 +65,11 @@ body {
 }
 .submitButton {
   height: 50px;
-  width: 150px;
+  width: 5vw;
   cursor: pointer;
   color: lightblue;
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 1vw;
   border: solid 5px lightblue;
   border-radius: 10px;
   font-weight: bolder;
@@ -151,5 +146,52 @@ body {
 .submitButtonsBox {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
+}
+.inputsAndFiltersBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
+}
+.inputAreaParentUpper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 40%;
+  height: 400px;
+}
+.filtersBox {
+  background-color: transparent;
+  border: solid 5px lightblue;
+  width: 40%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+.filtersBoxTitle {
+  color: lightblue;
+  text-align: center;
+}
+.radioButton {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.filtersBox {
+  color: white;
+}
+.radioButtonFilter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(2, auto);  /* 2 rows */
   gap: 1rem;
 }

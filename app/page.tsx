@@ -23,6 +23,8 @@ function App() {
   const listArea = useRef() as MutableRefObject<HTMLDivElement>;
   const inputArea = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const titleField = useRef() as MutableRefObject<HTMLInputElement>;
+  const pendingRadioButton = useRef() as MutableRefObject<HTMLInputElement>;
+  const completedRadioButton = useRef() as MutableRefObject<HTMLInputElement>;
   const localStorageItemKey = "toDo";
   const [localStorageArray, setLocalStorageArray] = useState<Task[]>([]);
 
@@ -55,6 +57,7 @@ function App() {
     }
     clearFields(taskTitleElement, taskElement);
     ifEdit = [false, -1, null, null];
+    filter();
   }
 
   function removeTask(index: number) {
@@ -64,6 +67,7 @@ function App() {
       array.splice(index, 1);
       localStorage.setItem(localStorageItemKey, JSON.stringify(array));
       setLocalStorageArray(array);
+      filter();
     }
   }
 
@@ -78,15 +82,18 @@ function App() {
     ifEdit[1] = index;
     ifEdit[2] = array[index].title;
     ifEdit[3] = array[index].description;
+    filter();
   }
 
   function editCompletionStatus(checkbox: EventTarget, index: number) {
     const isItCompleted = (checkbox as HTMLInputElement).checked;
+    console.log(isItCompleted);
     const tasksFromLocalStorage = localStorage.getItem(localStorageItemKey);
     const array = tasksFromLocalStorage ? JSON.parse(tasksFromLocalStorage) : null;
     array[index].isCompleted = isItCompleted;
     localStorage.setItem(localStorageItemKey, JSON.stringify(array));
     setLocalStorageArray(array);
+    //filter();
   }
 
   function clearFields(taskTitleField: HTMLInputElement, taskDescriptionField: HTMLTextAreaElement) {
@@ -94,7 +101,28 @@ function App() {
     taskDescriptionField.value = "";
   }
 
-  useEffect(() => {
+  function filter() {
+    let tasksFromLocalStorage = localStorage.getItem(localStorageItemKey);
+    if(tasksFromLocalStorage !== null && JSON.parse(tasksFromLocalStorage) !== null) {
+      const tasksFromLocalStorageArray = JSON.parse(tasksFromLocalStorage);
+      if(pendingRadioButton.current.checked) {
+        const newFilteredArray = tasksFromLocalStorageArray.filter((task: Task) => !task.isCompleted);
+        setLocalStorageArray(newFilteredArray);
+      }
+      else if(completedRadioButton.current.checked) {
+        const newFilteredArray = tasksFromLocalStorageArray.filter((task: Task) => task.isCompleted);
+        setLocalStorageArray(newFilteredArray);
+      }
+    }
+  }
+
+  function clearFilters() {
+    onLoadFunction();
+    pendingRadioButton.current.checked = false;
+    completedRadioButton.current.checked = false;
+  }
+
+  function onLoadFunction() {
     setIsCreateOrLoad(true);
     const tasksFromLocalStorage = localStorage.getItem(localStorageItemKey);
     if (tasksFromLocalStorage !== null) {
@@ -102,6 +130,10 @@ function App() {
       if (localStorageArray2 === null) localStorage.setItem(localStorageItemKey, JSON.stringify([]));
       else setLocalStorageArray(localStorageArray2);
     }
+  }
+
+  useEffect(() => {
+    onLoadFunction();
   }, []);
 
   useLayoutEffect(() => {
@@ -139,14 +171,29 @@ function App() {
           })
         }
       </div>
-      <div className="inputAreaParentUpper">
-        <div className="inputAreaParent">
-          <input type="text" className="inputField titleInputField" placeholder="Type Your To-Do Title Here.." ref={titleField} />
-          <textarea className="inputField" placeholder="Type Your To-Do Task Here.." ref={inputArea} />
+      <div className="inputsAndFiltersBox">
+        <div className="inputAreaParentUpper">
+          <div className="inputAreaParent">
+            <input type="text" className="inputField titleInputField" placeholder="Type Your To-Do Title Here.." ref={titleField} />
+            <textarea className="inputField" placeholder="Type Your To-Do Task Here.." ref={inputArea} />
+          </div>
+          <div className="submitButtonsBox">
+            <button className="submitButton" onClick={enterTask}> Submit </button>
+            <button className='submitButton' onClick={() => clearFields(titleField.current, inputArea.current)}>Clear</button>
+          </div>
         </div>
-        <div className="submitButtonsBox">
-          <button className="submitButton" onClick={enterTask}> Submit </button>
-          <button className='submitButton' onClick={() => clearFields(titleField.current, inputArea.current)}>Clear</button>
+        <div className="filtersBox">
+          <h1 className="filtersBoxTitle">Filters</h1>
+          <div className="radioButtonFilter">
+            <label>Pending</label>
+            <input type="radio" name="filterGroup" className="radioButton" value="pending" ref={pendingRadioButton}/>
+            <label>Completed</label>
+            <input type="radio" name="filterGroup" className="radioButton" value="completed" ref={completedRadioButton}/>
+          </div>
+          <div className="submitButtonsBox">
+            <button className="submitButton" onClick={filter}>Filter</button>
+            <button className="submitButton" onClick={clearFilters}>Clear</button>
+          </div>
         </div>
       </div>
     </div>
