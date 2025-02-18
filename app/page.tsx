@@ -27,7 +27,25 @@ function App() {
   const completedRadioButton = useRef() as MutableRefObject<HTMLInputElement>;
   const localStorageItemKey = "toDo";
   const [localStorageArray, setLocalStorageArray] = useState<Task[]>([]);
+  const [draggedItemIndex, setDraggedItemIndex] = useState(null);
 
+  function handleDragStart(index: any) {
+    setDraggedItemIndex(index);
+  }
+  
+  function handleDragOver(event: any) {
+    event.preventDefault();
+  }
+
+  function handleDrop(index: any) {
+    if (draggedItemIndex === null) return;
+    const updatedTasks = [...localStorageArray];
+    const draggedItem = updatedTasks.splice(draggedItemIndex, 1)[0];
+    updatedTasks.splice(index, 0, draggedItem);
+    setLocalStorageArray(updatedTasks);
+    localStorage.setItem(localStorageItemKey, JSON.stringify(updatedTasks));
+    setDraggedItemIndex(null);
+  }
 
   function enterTask() {
     const taskElement = inputArea.current;
@@ -145,9 +163,11 @@ function App() {
     <div className="mainContainer">
       <div className="toDoListArea" ref={listArea}>
         {
+          localStorageArray.length === 0 ? <h1 className="noResultsFound">No Result</h1>
+          :
           localStorageArray.map((item: Task, index: number) => {
             return (
-              <div className={`toDoListAreaRow toDoListAreaRow${index % 2 != 0 ? "Odd" : "Even"}`} key={index}>
+              <div draggable onDragStart={() => handleDragStart(index)} onDragOver={handleDragOver} onDrop={() => handleDrop(index)} className={`toDoListAreaRow toDoListAreaRow${index % 2 != 0 ? "Odd" : "Even"}`} key={index}>
                 <div className="taskContentParent">
                   <div className="checkboxParent">
                     <span className="customizedCheckBox">{item.isCompleted ? "✓" : ""}</span>

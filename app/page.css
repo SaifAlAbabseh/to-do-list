@@ -30,6 +30,7 @@ body {
   background-color: lightgray;
 }
 .toDoListAreaRow {
+  cursor: grab;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -37,6 +38,9 @@ body {
   align-items: center;
   padding: 20px 0;
   gap: 10px;
+}
+.toDoListAreaRow:hover {
+  background-color: white;
 }
 .inputAreaParent {
   display: flex;
@@ -194,4 +198,8 @@ body {
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
   grid-template-rows: repeat(2, auto);  /* 2 rows */
   gap: 1rem;
+}
+.noResultsFound {
+  text-align: center;
+  color: white;
 }
