@@ -144,10 +144,10 @@ function App() {
     setIsCreateOrLoad(true);
     const tasksFromLocalStorage = localStorage.getItem(localStorageItemKey);
     if (tasksFromLocalStorage !== null) {
-      const localStorageArray2 = JSON.parse(tasksFromLocalStorage);
-      if (localStorageArray2 === null) localStorage.setItem(localStorageItemKey, JSON.stringify([]));
-      else setLocalStorageArray(localStorageArray2);
+      const localStorageArray = JSON.parse(tasksFromLocalStorage);
+      if (localStorageArray !== null) setLocalStorageArray(localStorageArray)
     }
+    else localStorage.setItem(localStorageItemKey, JSON.stringify([]));
   }
 
   useEffect(() => {
