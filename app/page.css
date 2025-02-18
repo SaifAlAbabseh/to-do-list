@@ -37,10 +37,16 @@ body {
   padding: 20px 0;
   gap: 10px;
 }
-.inputArea {
+.inputAreaParentUpper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  gap: 10px;
+  width: 1000px;
+}
+.inputAreaParent {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 .inputField {
@@ -57,7 +63,10 @@ body {
   transition: 0.5s all;
 }
 .inputField:focus {
-  border: solid 10px lightgray;
+  border: solid 5px lightgray;
+}
+.titleInputField {
+  height: 50px;
 }
 .submitButton {
   height: 50px;
@@ -78,10 +87,10 @@ body {
 .toDoTaskLabel {
   color: black;
   padding: 0 0 0 20px;
-  max-width: 400px;
+  max-width: 600px;
   word-wrap: break-word;
 }
-.removeButton {
+.removeButton, .editButton {
   height: 50px;
   width: 50px;
   background-color: transparent;
@@ -93,6 +102,54 @@ body {
   transition: 0.5s color;
   margin-right: 20px;
 }
-.removeButton:hover {
+.editButton {
+  color: blue;
+}
+.removeButton:hover, .editButton:hover {
   color: black;
+}
+.taskContentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.taskContentParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.checkboxParent {
+  position: relative;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkbox, .customizedCheckBox {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+}
+.checkbox {
+  cursor: pointer;
+  opacity: 0;
+}
+.customizedCheckBox {
+  background-color: black;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rightArrow {
+  color: blue;
+  font-size: 2rem;
+}
+.submitButtonsBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
