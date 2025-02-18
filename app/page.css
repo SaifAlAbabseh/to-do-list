@@ -1,0 +1,98 @@
+body, html {
+  height: 100%;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  font-family: sans-serif;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.toDoListArea {
+  display: flex;
+  flex-direction: column;
+  border: solid 5px lightblue;
+  height: 700px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: auto;
+}
+.toDoListAreaRowEven {
+  background-color: lightblue;
+}
+.toDoListAreaRowOdd {
+  background-color: lightgray;
+}
+.toDoListAreaRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  gap: 10px;
+}
+.inputArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.inputField {
+  width: 400px;
+  height: 200px;
+  background-color: transparent;
+  border: solid 5px lightblue;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  outline: none;
+  color: white;
+  resize: none;
+  padding: 10px;
+  transition: 0.5s all;
+}
+.inputField:focus {
+  border: solid 10px lightgray;
+}
+.submitButton {
+  height: 50px;
+  width: 150px;
+  cursor: pointer;
+  color: lightblue;
+  background-color: transparent;
+  font-size: 1.5rem;
+  border: solid 5px lightblue;
+  border-radius: 10px;
+  font-weight: bolder;
+  transition: 0.5s all;
+}
+.submitButton:hover {
+  color: black;
+  background-color: lightblue;
+}
+.toDoTaskLabel {
+  color: black;
+  padding: 0 0 0 20px;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+.removeButton {
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  color: red;
+  font-size: 2rem;
+  font-weight: bolder;
+  cursor: pointer;
+  border: none;
+  transition: 0.5s color;
+  margin-right: 20px;
+}
+.removeButton:hover {
+  color: black;
+}
