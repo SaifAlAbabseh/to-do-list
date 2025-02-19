@@ -3,7 +3,6 @@ body, html {
 }
 body {
   display: flex;
-  align-items: center;
   justify-content: center;
   background-color: black;
   font-family: sans-serif;
@@ -11,14 +10,17 @@ body {
 .mainContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 40%;
+  margin-top: 100px;
+  height: 1100px;
   gap: 30px;
 }
 .toDoListArea {
   display: flex;
   flex-direction: column;
   border: solid 5px lightblue;
-  height: 700px;
+  height: 1000px;
   width: 100%;
   border-radius: 10px;
   overflow: auto;
@@ -39,12 +41,21 @@ body {
   padding: 20px 0;
   gap: 10px;
 }
+.rowButtons {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: end;
+}
 .toDoListAreaRow:hover {
   background-color: white;
 }
 .inputAreaParent {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
   width: 100%;
 }
@@ -83,11 +94,14 @@ body {
   color: black;
   background-color: lightblue;
 }
-.toDoTaskLabel {
-  color: black;
+.toDoTaskLabel, .toDoTaskTitleLabel {
+  color: blue;
   padding: 0 0 0 20px;
   max-width: 600px;
   word-wrap: break-word;
+}
+.toDoTaskLabel {
+  color: black;
 }
 .removeButton, .editButton {
   height: 50px;
@@ -110,7 +124,6 @@ body {
 .taskContentBox {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .taskContentParent {
   display: flex;
@@ -202,4 +215,32 @@ body {
 .noResultsFound {
   text-align: center;
   color: white;
+}
+
+@media only screen and (max-width: 1300px) {
+  .toDoListArea {
+    height: 600px;
+  }
+  .mainContainer {
+    width: 80%;
+    height: max-content;
+  }
+  .inputsAndFiltersBox {
+    width: 100%;
+    flex-direction: column;
+  }
+  .inputAreaParentUpper, .filtersBox {
+    width: 100%;
+  }
+  .submitButton {
+    width: max-content;
+    font-size: 1rem;
+  }
+  .checkbox, .customizedCheckBox {
+    width: 50px;
+    height: 50px;
+  }
+  .toDoTaskLabel, .toDoTaskTitleLabel {
+    max-width: 100px;
+  }
 }

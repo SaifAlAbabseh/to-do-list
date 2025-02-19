@@ -163,7 +163,7 @@ function App() {
     <div className="mainContainer">
       <div className="toDoListArea" ref={listArea}>
         {
-          localStorageArray.length === 0 ? <h1 className="noResultsFound">No Result</h1>
+          localStorageArray.length === 0 ? <h1 className="noResultsFound">No Tasks</h1>
           :
           localStorageArray.map((item: Task, index: number) => {
             return (
@@ -173,16 +173,16 @@ function App() {
                     <span className="customizedCheckBox">{item.isCompleted ? "✓" : ""}</span>
                     <input type="checkbox" className="checkbox" title="Is It Completed?" checked={item.isCompleted} onChange={(e) => editCompletionStatus(e.target, index)} />
                   </div>
-                  <div className="taskContentBox">
-                    <h2 className="toDoTaskLabel">
+                  <div className="taskContentBox" style={{ textDecoration: item.isCompleted ? "line-through" : "" }}>
+                    <h2 className="toDoTaskTitleLabel">
                       {item.title}
                     </h2>
                     <h2 className="toDoTaskLabel">
-                      <span className="rightArrow">↓</span> <br /> {item.description}
+                      {item.description}
                     </h2>
                   </div>
                 </div>
-                <div>
+                <div className="rowButtons">
                   <button title="Edit Task" className="editButton" onClick={() => editTask(index)}>✎</button>
                   <button title="Remove Task" className="removeButton" onClick={() => removeTask(index)}> X </button>
                 </div>
