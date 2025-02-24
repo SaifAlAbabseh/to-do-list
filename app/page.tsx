@@ -111,12 +111,17 @@ function App() {
     array[index].isCompleted = isItCompleted;
     localStorage.setItem(localStorageItemKey, JSON.stringify(array));
     setLocalStorageArray(array);
-    //filter();
   }
 
   function clearFields(taskTitleField: HTMLInputElement, taskDescriptionField: HTMLTextAreaElement) {
     taskTitleField.value = "";
     taskDescriptionField.value = "";
+    if(ifEdit[0]) {
+      ifEdit[0] = false;
+      ifEdit[1] = -1;
+      ifEdit[2] = null
+      ifEdit[3] = null;
+    }
   }
 
   function filter() {
